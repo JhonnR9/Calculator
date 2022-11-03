@@ -125,4 +125,22 @@ class Calculator {
 
         return resultFormatted
     }
+    fun resultFloat(): Float{
+        val resultFormatted: String = if (result.toString().endsWith(".0")) {
+            DecimalFormat("#").format(result)
+        }else{
+            if (result < 0f && result.toString().length > 6f){
+                DecimalFormat("#0.0000#").format(result)
+            }
+            result.toString()
+        }
+
+        return resultFormatted.toFloat()
+    }
+    fun equals(){
+
+        numberCache = resultFloat()
+        typed.clear()
+        typed.append(result)
+    }
 }

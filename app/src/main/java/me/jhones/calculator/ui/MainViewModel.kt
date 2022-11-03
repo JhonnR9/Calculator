@@ -60,6 +60,8 @@ class MainViewModel : ViewModel() {
         calculator.backspace()
         this._enteredValues.value = calculator.getValue()
     }
-
+fun equals(){
+        calculator.equals()
+}
 
 }

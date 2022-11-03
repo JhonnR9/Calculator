@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         observe()
 
 
+
         binding.btnAdd.setOnClickListener {
             mainViewModel.addOperator(Operation.PLUS)
         }
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnEquals.setOnClickListener {
             binding.txtInput.textSize = 25f
             binding.txtSolution.textSize = 35f
+            mainViewModel.equals()
         }
 
         setContentView(binding.root)
@@ -90,6 +92,9 @@ class MainActivity : AppCompatActivity() {
         }
         binding.btnNine.setOnClickListener {
             mainViewModel.enter(9f)
+        }
+        binding.btnDecimal.setOnClickListener {
+      //  mainViewModel.enter(.)
         }
     }
 
