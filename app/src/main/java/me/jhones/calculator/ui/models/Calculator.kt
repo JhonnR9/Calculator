@@ -2,6 +2,7 @@ package me.jhones.calculator.ui.models
 
 import me.jhones.calculator.ui.Operation
 import java.text.DecimalFormat
+import kotlin.NumberFormatException
 
 import kotlin.text.StringBuilder
 
@@ -9,9 +10,10 @@ class Calculator {
 
     private var currentNumber: StringBuilder = StringBuilder()
 
-    private var typed : StringBuilder = StringBuilder()
+    private var enteredValues: StringBuilder = StringBuilder()
 
-    private var numberCache = 0f
+    private var numbersCache = arrayListOf<String>()
+
 
     private var result: Float = 0f
 
@@ -20,15 +22,22 @@ class Calculator {
 
     fun enter(number: Float) {
         verifyZero()
-        typed.append(DecimalFormat("#").format(number))
+        enteredValues.append(DecimalFormat("#").format(number))
         currentNumber.append(DecimalFormat("#").format(number))
+    }
+
+    fun enter(dot: String) {
+        if (!currentNumber.endsWith(".")) {
+            enteredValues.append(dot)
+            currentNumber.append(dot)
+        }
     }
 
     fun getValue(): String {
         if (currentNumber.isEmpty()) currentNumber.append(0)
-        if (typed.isEmpty()) typed.append(currentNumber)
+        if (enteredValues.isEmpty()) enteredValues.append(currentNumber)
 
-        return typed.toString()
+        return enteredValues.toString()
     }
 
 
@@ -36,13 +45,13 @@ class Calculator {
         if (currentNumber.startsWith("0") && currentNumber.length == 1) {
             currentNumber.clear()
         }
-        if (typed.startsWith("0") && typed.length == 1) {
-           typed.clear()
+        if (enteredValues.startsWith("0") && enteredValues.length == 1) {
+            enteredValues.clear()
         }
     }
 
     fun clear() {
-        typed.clear()
+        enteredValues.clear()
         currentNumber.clear()
         result = 0f
         nextOperation = null
@@ -50,48 +59,78 @@ class Calculator {
 
     fun backspace() {
         if (currentNumber.isNotEmpty()) {
-            currentNumber.setLength(currentNumber.length - 1)
-            println(currentNumber)
-        }
-        if (typed.isNotEmpty()){
-            typed.setLength(typed.length -1)
+            if (currentNumber.endsWith(" ")) {
+                currentNumber.setLength(currentNumber.length - 3)
+            } else {
+                currentNumber.setLength(currentNumber.length - 1)
+            }
 
+        }
+        if (enteredValues.isNotEmpty()) {
+            if (enteredValues.endsWith(" ")) {
+                enteredValues.setLength(enteredValues.length - 3)
+            } else {
+                enteredValues.setLength(enteredValues.length - 1)
+            }
+
+        }
+        if (isOperation('+') || isOperation('×') ||
+            isOperation('÷') || isOperation('-')) {
+
+            numbersCache.minusElement(getLastNumberCache())
         }
 
 
     }
 
     fun addSum() {
-        numberCache = result
+        numbersCache.add(getResult())
         nextOperation = Operation.PLUS
-        typed.append(" + ")
+        checkSymbol("+")
         currentNumber.clear()
     }
 
     fun addMultiplication() {
-        numberCache = result
+        numbersCache.add(getResult())
         nextOperation = Operation.MULTIPLICATION
-        typed.append(" × ")
+        checkSymbol("×")
         currentNumber.clear()
     }
 
     fun addDivision() {
-        numberCache = result
+        numbersCache.add(getResult())
         nextOperation = Operation.DIVISION
-        typed.append(" ÷ ")
+        checkSymbol("÷")
         currentNumber.clear()
     }
 
     fun addSubtraction() {
-        numberCache = result
+        numbersCache.add(getResult())
         nextOperation = Operation.MINUS
-        typed.append(" - ")
+        checkSymbol("-")
         currentNumber.clear()
+    }
+
+    private fun checkSymbol(symbol: String) {
+        if (!enteredValues.endsWith(symbol)) {
+            enteredValues.append(symbol)
+        }
+    }
+
+    private fun isOperation(symbol: Char): Boolean {
+        return enteredValues.endsWith(symbol)
+
     }
 
     fun getResult(): String {
         if (nextOperation != null) {
-            val currentNum =  currentNumber.toString().toFloat()
+
+            val currentNum = try {
+                currentNumber.toString().toFloat()
+            } catch (e: NumberFormatException) {
+                0f
+            }
+            val numberCache = getLastNumberCache()
             result = when (nextOperation) {
                 Operation.PLUS -> {
                     numberCache + currentNum
@@ -107,40 +146,43 @@ class Calculator {
                     numberCache / currentNum
                 }
             }
+
         } else {
             result = currentNumber.toString().toFloat()
         }
 
-      return formattedResult()
+        return format(result)
     }
-    private fun formattedResult():String{
-        val resultFormatted: String = if (result.toString().endsWith(".0")) {
-            "=> ${DecimalFormat("#").format(result)}"
-        }else{
-            if (result < 0f && result.toString().length > 6f){
-                "=> ${DecimalFormat("#0.0000#").format(result)}"
-            }
-            result.toString()
+
+    private fun getLastNumberCache(): Float {
+        val numberCache = if (numbersCache.isNotEmpty()) {
+            numbersCache[numbersCache.lastIndex].toFloat()
+        } else {
+            0f
         }
 
-        return resultFormatted
+        println(numberCache)
+
+        return numberCache
     }
-    fun resultFloat(): Float{
-        val resultFormatted: String = if (result.toString().endsWith(".0")) {
-            DecimalFormat("#").format(result)
-        }else{
-            if (result < 0f && result.toString().length > 6f){
-                DecimalFormat("#0.0000#").format(result)
+
+    private fun format(number: Float): String {
+        val formatted: String = if (number.toString().endsWith(".0")) {
+            DecimalFormat("#").format(number)
+        } else {
+            if (number < 0f) {
+                DecimalFormat("#0.0000#").format(number)
+            } else {
+                number.toString()
             }
-            result.toString()
+
         }
-
-        return resultFormatted.toFloat()
+        return formatted
     }
-    fun equals(){
 
-        numberCache = resultFloat()
-        typed.clear()
-        typed.append(result)
+    fun equals() {
+        enteredValues.clear()
+        enteredValues.append(getResult())
+        numbersCache.add(format(result))
     }
 }

@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.enter(9f)
         }
         binding.btnDecimal.setOnClickListener {
-      //  mainViewModel.enter(.)
+             mainViewModel.enter(".")
         }
     }
 
