@@ -75,7 +75,8 @@ class Calculator {
 
         }
         if (isOperation('+') || isOperation('×') ||
-            isOperation('÷') || isOperation('-')) {
+            isOperation('÷') || isOperation('-')
+        ) {
 
             numbersCache.minusElement(getLastNumberCache())
         }
