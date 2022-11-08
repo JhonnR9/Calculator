@@ -22,34 +22,35 @@ class MainViewModel : ViewModel() {
 
     fun enter(value: Float) {
         calculator.enter(value)
-       updateValues()
+        updateValues()
     }
-    fun enter(dot: String){
+
+    fun enter(dot: String) {
         calculator.enter(dot)
         updateValues()
     }
 
-    private fun updateValues(){
-        _enteredValues.value = calculator.getValue()
+    private fun updateValues() {
+        _enteredValues.value = calculator.enteredValues.toString()
         _result.value = calculator.getResult()
     }
 
     fun addOperator(operation: Operation) {
         when (operation) {
             Operation.PLUS -> {
-               calculator.addSum()
+                calculator.addOperator("+")
                 updateValues()
             }
-            Operation.MINUS-> {
-               calculator.addSubtraction()
+            Operation.MINUS -> {
+                calculator.addOperator("-")
                 updateValues()
             }
-            Operation.MULTIPLICATION ->{
-               calculator.addMultiplication()
+            Operation.MULTIPLICATION -> {
+                calculator.addOperator("*")
                 updateValues()
             }
-            Operation.DIVISION ->{
-                calculator.addDivision()
+            Operation.DIVISION -> {
+                calculator.addOperator("/")
                 updateValues()
             }
         }
@@ -57,16 +58,17 @@ class MainViewModel : ViewModel() {
 
     fun clear() {
         calculator.clear()
-        _enteredValues.value = calculator.getValue()
-        _result.value = calculator.getResult()
+        updateValues()
     }
 
     fun backspace() {
         calculator.backspace()
         updateValues()
     }
-fun equals(){
+
+    fun equals() {
         calculator.equals()
-}
+        updateValues()
+    }
 
 }

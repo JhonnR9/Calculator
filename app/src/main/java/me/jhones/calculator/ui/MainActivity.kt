@@ -43,9 +43,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnEquals.setOnClickListener {
+            mainViewModel.equals()
             binding.txtInput.textSize = 25f
             binding.txtSolution.textSize = 35f
-            mainViewModel.equals()
+
         }
 
         setContentView(binding.root)
