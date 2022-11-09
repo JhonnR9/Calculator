@@ -32,25 +32,25 @@ class MainViewModel : ViewModel() {
 
     private fun updateValues() {
         _enteredValues.value = calculator.enteredValues.toString()
-        _result.value = calculator.getResult()
+        _result.value ="=> ${calculator.getResult()}"
     }
 
     fun addOperator(operation: Operation) {
         when (operation) {
             Operation.PLUS -> {
-                calculator.addOperator("+")
+                calculator.addOperator(Operation.PLUS.symbol)
                 updateValues()
             }
             Operation.MINUS -> {
-                calculator.addOperator("-")
+                calculator.addOperator(Operation.MINUS.symbol)
                 updateValues()
             }
             Operation.MULTIPLICATION -> {
-                calculator.addOperator("*")
+                calculator.addOperator(Operation.MULTIPLICATION.symbol)
                 updateValues()
             }
             Operation.DIVISION -> {
-                calculator.addOperator("/")
+                calculator.addOperator(Operation.DIVISION.symbol)
                 updateValues()
             }
         }

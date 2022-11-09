@@ -1,7 +1,10 @@
 package me.jhones.calculator.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
+import android.view.Gravity
+import android.webkit.WebSettings
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import me.jhones.calculator.databinding.ActivityMainBinding
 
@@ -44,8 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnEquals.setOnClickListener {
             mainViewModel.equals()
-            binding.txtInput.textSize = 25f
-            binding.txtSolution.textSize = 35f
+            binding.txtSolution.setTextSize(TypedValue.COMPLEX_UNIT_SP , 45f)
+            binding.txtInput.setTextSize(TypedValue.COMPLEX_UNIT_SP , 35f)
 
         }
 
@@ -54,8 +57,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun observe() {
         mainViewModel.enteredValues.observe(this) {
-            binding.txtInput.textSize = 35f
-            binding.txtSolution.textSize = 25f
+            binding.txtInput.setTextSize(TypedValue.COMPLEX_UNIT_SP , 45f)
+            binding.txtSolution.setTextSize(TypedValue.COMPLEX_UNIT_SP , 35f)
             binding.txtInput.text = it
         }
         mainViewModel.result.observe(this) {

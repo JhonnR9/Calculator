@@ -1,5 +1,7 @@
 package me.jhones.calculator.ui.models
 
+import me.jhones.calculator.ui.Operation
+
 class Expression(private var expression: String) {
     val value get() = calculateExpression()
 
@@ -18,11 +20,22 @@ class Expression(private var expression: String) {
         var index = 0
         for (char in expression) {
 
-            val isOperation = (char == '+' || char == '*' || char == '/' || char == '-')
+            val isOperation = (
+                    char == Operation.PLUS.symbol ||
+                            char == Operation.MULTIPLICATION.symbol ||
+                            char == Operation.DIVISION.symbol ||
+                            char == Operation.MINUS.symbol
+                    )
 
             if (isOperation) {
                 operation.add(char)
-                numbers.add(currentNumber.toString().toFloat())
+                try {
+                    numbers.add(currentNumber.toString().toFloat())
+                } catch (e: NumberFormatException) {
+                    index++
+                    continue
+                }
+
                 currentNumber.clear()
             } else if (char == ' ') {
                 index++
@@ -44,14 +57,14 @@ class Expression(private var expression: String) {
 
 
         when (op) {
-            '+' -> {
+            Operation.PLUS.symbol -> {
                 try {
                     result += numbers[index + 1]
                 } catch (e: IndexOutOfBoundsException) {
 
                 }
             }
-            '-' -> {
+            Operation.MINUS.symbol -> {
                 try {
                     result -= numbers[index + 1]
                 } catch (e: IndexOutOfBoundsException) {
@@ -59,7 +72,7 @@ class Expression(private var expression: String) {
                 }
 
             }
-            '*' -> {
+            Operation.MULTIPLICATION.symbol -> {
                 try {
                     result *= numbers[index + 1]
                 } catch (e: IndexOutOfBoundsException) {
@@ -67,7 +80,7 @@ class Expression(private var expression: String) {
                 }
 
             }
-            '/' -> {
+            Operation.DIVISION.symbol -> {
                 try {
                     result /= numbers[index + 1]
                 } catch (e: IndexOutOfBoundsException) {

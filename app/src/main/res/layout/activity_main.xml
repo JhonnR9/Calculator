@@ -1,268 +1,363 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="8dp">
+    android:theme="@style/Theme.Calculator.Buttons">
 
 
-
-    <LinearLayout
+    <TextView
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:id="@+id/txtInput"
         android:layout_width="fill_parent"
-        android:layout_height="99dp"
-        android:orientation="vertical"
-        android:layout_weight="0.67">
+        android:layout_marginBottom="16dp"
+        android:layout_height="0dp"
+        android:gravity="end|bottom"
+        android:paddingStart="10sp"
+        android:text="0"
+        tools:ignore="HardcodedText"
+        android:paddingTop="5sp"
+        android:paddingEnd="10sp"
+        android:textColor="@color/purple_200"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtSolution"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtSolution"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:gravity="end|bottom"
+        android:paddingStart="10sp"
+        android:paddingTop="5sp"
+        android:paddingEnd="10sp"
+        android:text="0"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtInput"
+        tools:ignore="HardcodedText" />
 
 
 
-        <TextView
-            android:id="@+id/txtInput"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.50"
-            android:gravity="right"
-            android:paddingRight="10sp"
-            android:paddingTop="5sp"
-            android:textSize="15pt"
-            android:textColor="@color/purple_200"
-            android:textStyle="bold" />
 
-
-
-
-        <TextView
-            android:id="@+id/txtSolution"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.50"
-            android:gravity="right"
-            android:text="= 0"
-            android:paddingRight="10sp"
-            android:paddingTop="5sp"
-            android:textSize="15pt"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/square"
+        android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:orientation="horizontal" >
+        android:layout_weight="5"
+        android:text="√"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toTopOf="@+id/btnNine"
+        app:layout_constraintEnd_toStartOf="@+id/btnBack"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/percentage"
+        tools:ignore="HardcodedText" />
 
-
-        <Button
-            android:textColor="@color/amber_200"
-            android:id="@+id/btnClear"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="5"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="C" />
-
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight=".51"
-            android:textStyle="bold"
-            android:textColor="@color/amber_200"
-            android:textSize="40sp"
-            android:text="⌫" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/percentage"
+        android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:orientation="horizontal" >
+        android:layout_weight="5"
 
+        android:text=" %"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toTopOf="@+id/btnEight"
+        app:layout_constraintEnd_toStartOf="@+id/square"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnClear"
+        tools:ignore="HardcodedText" />
 
-        <Button
-            android:id="@+id/btnSeven"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="7" />
-
-
-        <Button
-            android:id="@+id/btnEight"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="8" />
-
-
-        <Button
-            android:id="@+id/btnNine"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="9" />
-
-
-        <Button
-            android:id="@+id/btnDivide"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1.15"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:textColor="@color/amber_200"
-            android:text="÷" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:orientation="horizontal" >
+        android:layout_weight="5"
+        android:text="C"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toTopOf="@+id/btnSeven"
+        app:layout_constraintEnd_toStartOf="@+id/percentage"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
 
-
-        <Button
-            android:id="@+id/btnFour"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:text="4" />
-
-
-        <Button
-            android:id="@+id/btnFive"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="5" />
-
-
-        <Button
-            android:id="@+id/btnSix"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="6" />
-
-
-        <Button
-            android:id="@+id/btnMultiply"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight=".98"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:textColor="@color/amber_200"
-            android:text="×" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:orientation="horizontal" >
+        android:layout_weight=".51"
+        android:text="⌫"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toTopOf="@+id/btnDivide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/square"
+        tools:ignore="HardcodedText" />
 
-
-        <Button
-            android:id="@+id/btnOne"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="1" />
-
-
-        <Button
-            android:id="@+id/btnTwo"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="2" />
-
-
-        <Button
-            android:id="@+id/btnThree"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="3" />
-
-
-        <Button
-            android:id="@+id/btnSubtract"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1.27"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:textColor="@color/amber_200"
-            android:text="-" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/btnSeven"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="75dp"
-        android:orientation="horizontal" >
+        android:layout_weight="1"
+        android:text="7"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnFour"
+        app:layout_constraintEnd_toStartOf="@+id/btnEight"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnEight"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="8"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnFive"
+        app:layout_constraintEnd_toStartOf="@+id/btnNine"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSeven"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnNine"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="9"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnSix"
+        app:layout_constraintEnd_toStartOf="@+id/btnDivide"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnEight"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnDivide"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1.15"
+        android:text="÷"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toTopOf="@+id/btnMultiply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnNine"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnFour"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="4"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnOne"
+        app:layout_constraintEnd_toStartOf="@+id/btnFive"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnFive"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="5"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnTwo"
+        app:layout_constraintEnd_toStartOf="@+id/btnSix"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnFour"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnSix"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="6"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnThree"
+        app:layout_constraintEnd_toStartOf="@+id/btnMultiply"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnFive"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnMultiply"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight=".98"
+        android:text="×"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubtract"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnSix"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnOne"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="1"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/btnTwo"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
 
 
-        <Button
-            android:id="@+id/btnDecimal"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight="1.22"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="." />
+    <Button
+        android:id="@+id/btnTwo"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="2"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnZero"
+        app:layout_constraintEnd_toStartOf="@+id/btnThree"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnOne"
+        tools:ignore="HardcodedText" />
 
 
-        <Button
-            android:id="@+id/btnZero"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight=".98"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="0" />
+    <Button
+        android:id="@+id/btnThree"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:text="3"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnEquals"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubtract"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnTwo"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnSubtract"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1.27"
+        android:text="-"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnThree"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnDecimal"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight="1.22"
+        android:text="."
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnZero"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnZero"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight=".98"
+        android:text="0"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnEquals"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnDecimal"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnEquals"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight=".95"
+        android:text="="
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnZero"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_weight=".93"
+        android:text="+"
+        android:textColor="@color/amber_200"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:theme="@style/Theme.Calculator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnEquals"
+        tools:ignore="HardcodedText" />
 
 
-        <Button
-            android:id="@+id/btnEquals"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight=".95"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:backgroundTint="@color/teal_200"
-            android:text="=" />
-
-
-        <Button
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:layout_weight=".93"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:textColor="@color/amber_200"
-            android:text="+" />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

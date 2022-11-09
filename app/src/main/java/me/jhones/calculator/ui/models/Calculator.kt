@@ -16,6 +16,10 @@ class Calculator {
 
 
     fun enter(number: Float) {
+        if (enteredValues.startsWith("0")&& !enteredValues.contains('.')){
+            enteredValues.clear()
+        }
+
         enteredValues.append(DecimalFormat( "#").format(number))
     }
 
@@ -29,6 +33,8 @@ class Calculator {
     fun clear() {
         isAddOperator = false
         enteredValues.clear()
+        enteredValues.append("0")
+        isEqualState = false
 
     }
 
@@ -36,19 +42,20 @@ class Calculator {
         if (enteredValues.isNotEmpty()) {
             enteredValues.setLength(enteredValues.length - 1)
         }
-        isAddOperator = (enteredValues.contains("+")
-                || enteredValues.contains("-")
-                || enteredValues.contains("*")
-                || enteredValues.contains("/"))
+        isAddOperator = (enteredValues.contains(Operation.PLUS.symbol)
+                || enteredValues.contains(Operation.MINUS.symbol)
+                || enteredValues.contains(Operation.MULTIPLICATION.symbol)
+                || enteredValues.contains(Operation.DIVISION.symbol))
 
 
     }
 
-    fun addOperator(operator: String) {
+    fun addOperator(operator: Char) {
         isAddOperator = true
         if (isEqualState) {
             enteredValues.clear()
             enteredValues.append(numberCache)
+            isEqualState = false
         }
         enteredValues.append(" $operator ")
     }
@@ -57,19 +64,24 @@ class Calculator {
         if (!isAddOperator) {
             return enteredValues.toString()
         }
-        val expression = Expression(enteredValues.toString())
-        return format(expression.value)
+        return try {
+            val expression = Expression(enteredValues.toString())
+            format(expression.value)
+        } catch (e: Exception){
+            "Error"
+        }
+
     }
 
 
     private fun format(number: Float): String {
         val formatted: String = if (number.toString().endsWith(".0")) {
-            DecimalFormat("#").format(number)
+            (" ${DecimalFormat("#").format(number)}")
         } else {
             if (number < 0f) {
-                DecimalFormat("#0.0000#").format(number)
+                (" ${DecimalFormat("#0.0000#").format(number)}")
             } else {
-                number.toString()
+                ( " $number")
             }
 
         }
